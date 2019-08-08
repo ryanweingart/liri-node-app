@@ -4,6 +4,9 @@ var log = console.log;
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
+var axios = require("axios"); 
+// var moment = require("moment");
+// var fs = require("fs");
 
 //Spotify keys
 var spotifyKey = keys.spotify.id;
@@ -14,10 +17,10 @@ var spotify = new Spotify({
   secret: spotifySecret
 });
  
-var artistName = function(artist) {
+function artistName(artist) {
     return artist.name;
 }
-var spotifySearch = function(songName) {
+function spotifySearch(songName) {
 
     spotify.search({ type: 'track', query: songName }, function(err, data) {
         if (err) {
@@ -36,17 +39,28 @@ var spotifySearch = function(songName) {
     });
 }
 
-var userActions = function(caseData, functionData) {
+function movieSearch(movie) {
+
+    var queryURL = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
+
+    axios.get(queryURL).then(function(response) {
+        log(response.data);
+    })
+}
+function userActions(caseData, functionData) {
     switch(caseData) {
         case "spotify-this-song":
             spotifySearch(functionData);
+            break;
+        case "movie-this":
+            movieSearch(functionData);
             break;
         default:
         console.log("LIRI does not know that");
     }
 }
 
-var userInput = function(argOne, argTwo) {
+function userInput(argOne, argTwo) {
     userActions(argOne, argTwo);
 };
 
