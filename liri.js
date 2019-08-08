@@ -44,7 +44,16 @@ function movieSearch(movie) {
     var queryURL = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
 
     axios.get(queryURL).then(function(response) {
-        log(response.data);
+        var data = response.data;
+
+        log("Title: " + data.Title);
+        log("Release Year: " + data.Year);
+        log("IMDB Rating: " + data.imdbRating);
+        log("Rotten Tomatoes Rating: " + data.tomatoRating);
+        log("Country of Production: " + data.Country);
+        log("Language: " + data.Language);
+        log("Plot: " + data.Plot);
+        log("Actors/Actresses: " + data.Actors);
     })
 }
 function userActions(caseData, functionData) {
