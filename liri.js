@@ -6,7 +6,7 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios"); 
 // var moment = require("moment");
-// var fs = require("fs");
+var fs = require("fs");
 
 //Spotify keys
 var spotifyKey = keys.spotify.id;
@@ -56,6 +56,24 @@ function movieSearch(movie) {
         log("Actors/Actresses: " + data.Actors);
     })
 }
+
+function doWhatItSays () {
+
+    fs.readFile("random.txt", "utf8", function(error, data) {
+
+        if (error) {
+            return log(error);
+        }
+
+        var dataArr = data.split(",");
+
+        if (dataArr.length == 2) {
+            userActions(dataArr[0], dataArr[1]);
+        } else if (dataArr.length == 1) {
+            userActions(dataArr[0]);
+        }
+    })
+}
 function userActions(caseData, functionData) {
     switch(caseData) {
         case "spotify-this-song":
@@ -63,6 +81,9 @@ function userActions(caseData, functionData) {
             break;
         case "movie-this":
             movieSearch(functionData);
+            break;
+        case "do-what-it-says":
+            doWhatItSays();
             break;
         default:
         console.log("LIRI does not know that");
