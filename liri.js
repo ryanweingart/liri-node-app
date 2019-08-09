@@ -5,7 +5,7 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var axios = require("axios"); 
-// var moment = require("moment");
+var moment = require("moment");
 var fs = require("fs");
 
 //Spotify keys
@@ -17,9 +17,7 @@ var spotify = new Spotify({
   secret: spotifySecret
 });
  
-function artistName(artist) {
-    return artist.name;
-}
+
 function spotifySearch(songName) {
 
     spotify.search({ type: 'track', query: songName }, function(err, data) {
@@ -41,19 +39,38 @@ function spotifySearch(songName) {
 
 function movieSearch(movie) {
 
-    var queryURL = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
+    var apiURL = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
 
-    axios.get(queryURL).then(function(response) {
-        var data = response.data;
+    axios.get(apiURL).then(function(response) {
+        var movieData = response.data;
 
-        log("Title: " + data.Title);
-        log("Release Year: " + data.Year);
-        log("IMDB Rating: " + data.imdbRating);
-        log("Rotten Tomatoes Rating: " + data.tomatoRating);
-        log("Country of Production: " + data.Country);
-        log("Language: " + data.Language);
-        log("Plot: " + data.Plot);
-        log("Actors/Actresses: " + data.Actors);
+        log("Title: " + movieData.Title);
+        log("Release Year: " + movieData.Year);
+        log("IMDB Rating: " + movideData.imdbRating);
+        log("Rotten Tomatoes Rating: " + movieData.tomatoRating);
+        log("Country of Production: " + movieData.Country);
+        log("Language: " + movieData.Language);
+        log("Plot: " + movieData.Plot);
+        log("Actors/Actresses: " + movieData.Actors);
+    })
+}
+
+function concertSearch() {
+    var artistName = process.argv.slice(3).join(" ");
+
+    var bandsURL = "https://rest.bandsintown.com/artists/" + artistName + "/events?app_id=codingbootcamp";
+
+    axios.get(bandsURL).then(function(response) {
+
+        for (var i = 0; i < response.data.length; i++) {
+            var bandData = response.data[i];  
+            
+            log("================================================")
+            log("Artist: " + bandData.lineup);
+            log("Venue: " + bandData.venue.name);
+            log("Location: " + bandData.venue.city);
+            log("Date: " + moment(bandData.datetime).format("MM/DD/YYYY"));
+        }
     })
 }
 
@@ -81,6 +98,9 @@ function userActions(caseData, functionData) {
             break;
         case "movie-this":
             movieSearch(functionData);
+            break;
+        case "concert-this":
+            concertSearch(functionData);
             break;
         case "do-what-it-says":
             doWhatItSays();
