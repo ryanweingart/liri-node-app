@@ -34,6 +34,12 @@ function spotifySearch(songName) {
             log("album: " + songs[i].album.name);
             log("=========================================================");
         }
+
+        // fs.appendFile("log.txt", ", " + songs, function(error) {
+        //     if (error) {
+        //         return log(error);
+        //     }
+        // })
     });
 }
 
