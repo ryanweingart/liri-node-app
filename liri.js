@@ -20,13 +20,17 @@ var spotify = new Spotify({
 //Function that will query song using the Spotify module
 function spotifySearch(songName) {
 
+    if (!songName) {
+        songName = "Ace of Base";
+    }
+
     spotify.search({ type: 'track', query: songName }, function(err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        
-        var songs = data.tracks.items;
 
+        var songs = data.tracks.items;
+        
         for (var i = 0; i < songs.length; i++) {
             log("artist(s): " + songs[i].artists[0].name);
             log("song name: " + songs[i].name);
@@ -34,7 +38,8 @@ function spotifySearch(songName) {
             log("album: " + songs[i].album.name);
             log("=========================================================");
         }
-
+        
+    
         // fs.appendFile("log.txt", ", " + songs, function(error) {
         //     if (error) {
         //         return log(error);
