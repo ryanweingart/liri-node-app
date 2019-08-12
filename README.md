@@ -6,9 +6,9 @@ Welcome to LIRI Bot! LIRI is a Language Interpretation and Recognition Interface
 
 LIRI Bot has the capability to take in four different commands from the user:
 
-* spotify-this-song "<song name here>"
-* movie-this "<movie title here>"
-* concert-this "<name of band/singer here>"
+* spotify-this-song "song name here"
+* movie-this "movie title here"
+* concert-this "name of band/singer here"
 * do-what-it-says
 
 The user can type in any four of these commands with the desired parameter and LIRI Bot will display the data the user is looking for.
