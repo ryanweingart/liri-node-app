@@ -51,6 +51,10 @@ function spotifySearch(songName) {
 //Function that will query movies using the OMDB api
 function movieSearch(movie) {
 
+    if (!movie) {
+        movie = "Mr. Nobody";
+    }
+
     var apiURL = "http://www.omdbapi.com/?apikey=trilogy&t=" + movie;
 
     axios.get(apiURL).then(function(response) {
@@ -68,8 +72,11 @@ function movieSearch(movie) {
 }
 
 //Function that will query concerts using the Bands in Town api
-function concertSearch() {
-    var bandName = process.argv.slice(3).join(" ");
+function concertSearch(bandName) {
+        
+    if (!bandName) {
+        bandName = "Andrea Bocelli";
+    }
 
     var bandsURL = "https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp";
 
