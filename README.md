@@ -59,7 +59,7 @@ For the "concert-this" command, the user is able to enter this phrase and then e
 * Venue Location
 * Date of Event
 
-For the date of the event, LIRI Bot uses Moment.js package to format the date to MM/DD/YYYY.
+For the date of the event, LIRI Bot uses **Moment.js** package to format the date to MM/DD/YYYY.
 
 The following is an example of the user entering the band "21 Pilots" with the results displayed:
 
@@ -71,6 +71,6 @@ If no band/singer is entered into the command line, LIRI Bot will auto-enter the
 
 ## do-what-it-says
 
-For the "do-what-it-says" command, LIRI Bot will use the fs Node package and take the text that is located inside of random.txt to call the spotify-this-song command. The random.txt file will have LIRI Bot search for the song "I Want It That Way" and it will display the results as if it were entered by the user into the spotify-this-song command:
+For the "do-what-it-says" command, LIRI Bot will use the fs Node package with the command "readFile" and "read" the text that is located inside of random.txt to call the spotify-this-song command. The random.txt file will have LIRI Bot search for the song "I Want It That Way" and it will display the results as if it were entered by the user into the spotify-this-song command:
 
 ![do what it says image](https://github.com/ryanweingart/liri-node-app/blob/master/images/do-what-it-says-image.png)
